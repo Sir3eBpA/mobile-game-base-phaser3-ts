@@ -1,6 +1,7 @@
 import Phaser, {Scene} from 'phaser';
 import SceneExtraRecord from "./utils/sceneExtraRecord";
 import Handler from "./scenes/handler";
+import Hub from "~/scenes/hub";
 
 export const sceneRecords: Map<Scene, SceneExtraRecord> = new Map<Phaser.Scene, SceneExtraRecord>();
 
@@ -40,7 +41,7 @@ const config: Phaser.Types.Core.GameConfig = {
     dom: {
         createContainer: true
     },
-    scene: [Handler]
+    scene: [Handler, Hub]
 }
 
 export const game = new Phaser.Game(config);
