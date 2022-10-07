@@ -2,6 +2,7 @@ import Phaser, {Scene} from "phaser";
 import {sceneRecords} from "~/main";
 import Image = Phaser.GameObjects.Image;
 import Text = Phaser.GameObjects.Text;
+import Handler from "~/scenes/handler";
 
 export default class Hub extends Phaser.Scene {
 
@@ -14,7 +15,7 @@ export default class Hub extends Phaser.Scene {
     private fullscreenBtn: Image|null = null;
     private creditsTxt: Text|null = null;
 
-    private handlerScene: Scene|null = null;
+    private handlerScene: Handler|null = null;
 
     constructor() {
         super('hub');
@@ -28,7 +29,7 @@ export default class Hub extends Phaser.Scene {
         //---------------------------------------------------------------------->
         this.canvasWidth = this.sys.game.canvas.width;
         this.canvasHeight = this.sys.game.canvas.height;
-        this.handlerScene = this.scene.get('handler');
+        this.handlerScene = this.scene.get('handler') as Handler;
         //Orientation
         //this.scale.lockOrientation(this.game.orientation)
 
@@ -65,9 +66,9 @@ export default class Hub extends Phaser.Scene {
     }
 
     clickBackScene(sceneTxt) {
-        const scene = this.scene.get(sceneTxt)
-        let gotoScene
-        let bgColorScene
+        const scene = this.scene.get(sceneTxt);
+        let gotoScene;
+        let bgColorScene;
 
         switch (sceneTxt) {
             case "title":
@@ -90,15 +91,15 @@ export default class Hub extends Phaser.Scene {
 
     resize() {
         if(this.fullscreenBtn)
-            this.fullscreenBtn.x = this.scale.gameSize.width - 30
+            this.fullscreenBtn.x = this.scale.gameSize.width - 30;
 
         if(this.soundBtn)
-            this.soundBtn.x = this.scale.gameSize.width - 30
+            this.soundBtn.x = this.scale.gameSize.width - 30;
 
         if(this.creditsTxt)
-            this.creditsTxt.x = this.scale.gameSize.width / 2
+            this.creditsTxt.x = this.scale.gameSize.width / 2;
 
         if(this.creditsTxt)
-            this.creditsTxt.y = this.scale.gameSize.height - 30
+            this.creditsTxt.y = this.scale.gameSize.height - 30;
     }
 }

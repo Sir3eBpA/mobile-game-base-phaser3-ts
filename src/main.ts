@@ -2,6 +2,7 @@ import Phaser, {Scene} from 'phaser';
 import SceneExtraRecord from "./utils/sceneExtraRecord";
 import Handler from "./scenes/handler";
 import Hub from "~/scenes/hub";
+import Preload from "~/scenes/preload";
 
 export const sceneRecords: Map<Scene, SceneExtraRecord> = new Map<Phaser.Scene, SceneExtraRecord>();
 
@@ -12,15 +13,6 @@ export const MIN_SIZE_WIDTH_SCREEN = 270
 export const MIN_SIZE_HEIGHT_SCREEN = 480
 export const SIZE_WIDTH_SCREEN = 540
 export const SIZE_HEIGHT_SCREEN = 960
-
-export const screenBaseSize = {
-    maxWidth: MAX_SIZE_WIDTH_SCREEN,
-    maxHeight: MAX_SIZE_HEIGHT_SCREEN,
-    minWidth: MIN_SIZE_WIDTH_SCREEN,
-    minHeight: MIN_SIZE_HEIGHT_SCREEN,
-    width: SIZE_WIDTH_SCREEN,
-    height: SIZE_HEIGHT_SCREEN
-}
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
@@ -41,7 +33,16 @@ const config: Phaser.Types.Core.GameConfig = {
     dom: {
         createContainer: true
     },
-    scene: [Handler, Hub]
+    scene: [Handler, Hub, Preload]
 }
 
 export const game = new Phaser.Game(config);
+
+export const screenBaseSize = {
+    maxWidth: MAX_SIZE_WIDTH_SCREEN,
+    maxHeight: MAX_SIZE_HEIGHT_SCREEN,
+    minWidth: MIN_SIZE_WIDTH_SCREEN,
+    minHeight: MIN_SIZE_HEIGHT_SCREEN,
+    width: SIZE_WIDTH_SCREEN,
+    height: SIZE_HEIGHT_SCREEN
+}

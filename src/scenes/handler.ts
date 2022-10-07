@@ -4,24 +4,26 @@ import {sceneRecords, screenBaseSize} from '~/main';
 
 export default class Handler extends Phaser.Scene {
     // Vars
-    private sceneRunning: string = '';
+    public sceneRunning: string = '';
 
     public constructor() {
         super('handler');
     }
 
     private create() {
-        this.cameras.main.setBackgroundColor('#FFF')
-        this.launchScene('preload')
-        this.launchScene('hub')
+        this.cameras.main.setBackgroundColor('#FFF');
+        this.launchScene('preload');
+        this.launchScene('hub');
     }
 
     private launchScene(scene: string, data: any = {}) {
         this.scene.launch(scene, data)
     }
 
-    private updateResize(scene: Scene) {
-        scene.scale.on('resize', this.resize, scene)
+    public updateResize(scene: Scene) {
+        // if scene hasn't been registered yet, register it
+        if(!sceneRecords.has(scene))
+            scene.scale.on('resize', this.resize, scene)
 
         const scaleWidth = scene.scale.gameSize.width
         const scaleHeight = scene.scale.gameSize.height
@@ -33,12 +35,12 @@ export default class Handler extends Phaser.Scene {
         }
 
         record.parent = new Phaser.Structs.Size(scaleWidth, scaleHeight);
-        record.sizer = new Phaser.Structs.Size(scene.scale.width, scene.scale.height, Phaser.Structs.Size.FIT, record.parent);
+        record.sizer = new Phaser.Structs.Size(screenBaseSize.width, screenBaseSize.height, Phaser.Structs.Size.FIT, record.parent);
 
         record.parent.setSize(scaleWidth, scaleHeight);
         record.sizer.setSize(scaleWidth, scaleHeight);
 
-        this.updateCamera(scene)
+        this.updateCamera(scene);
     }
 
     resize(gameSize: Phaser.Structs.Size) {
@@ -55,9 +57,11 @@ export default class Handler extends Phaser.Scene {
             resizeRecord.sizer.setSize(width, height);
 
             // updateCamera - TO DO: Improve the next code because it is duplicated
-            const camera = this.cameras.main
-            const scaleX = resizeRecord.sizer.width / screenBaseSize.width
-            const scaleY = resizeRecord.sizer.height / screenBaseSize.height
+            const scaleX = resizeRecord.sizer.width / screenBaseSize.width;
+            const scaleY = resizeRecord.sizer.height / screenBaseSize.height;
+
+            const camera = this.cameras.main;
+            if(!camera) return;
 
             camera.setZoom(Math.max(scaleX, scaleY))
             camera.centerOn(screenBaseSize.width / 2, screenBaseSize.height / 2)
