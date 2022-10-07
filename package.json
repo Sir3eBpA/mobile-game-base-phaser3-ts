@@ -1,0 +1,34 @@
+{
+  "name": "mobile-game-base-phaser3-ts",
+  "version": "1.0.0",
+  "description": "Base project to make responsive mobile games using Phaser 3 and TypeScript",
+  "scripts": {
+    "start": "parcel src/index.html -p 8000",
+    "build": "parcel build src/index.html --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sir3eBpA/mobile-game-base-phaser3-ts.git"
+  },
+  "author": "Sir3eBpA",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sir3eBpA/mobile-game-base-phaser3-ts/issues"
+  },
+  "homepage": "https://github.com/Sir3eBpA/mobile-game-base-phaser3-ts#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
+    "eslint": "^6.8.0",
+    "minimist": ">=1.2.2",
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-clean-easy": "^1.0.2",
+    "parcel-plugin-static-files-copy": "^2.4.3",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "phaser": "^3.55.2"
+  }
+}
